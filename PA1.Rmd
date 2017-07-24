@@ -8,6 +8,7 @@ output:
 
 ## Loading and preprocessing the data
 
+library(data.table)
 
 ```{r echo = TRUE}
 
@@ -99,6 +100,8 @@ hist( steps, xlab="Day", ylab="Steps", breaks=length(stepsPerDayN))
 xnew$weekday <- weekdays( as.Date (xnew[, "date"]))
 
 xnew$daytype <- factor( ifelse (xnew[, "weekday"] == "Saturday" |  xnew[, "weekday"] == "Sunday", "Weekend", "Weekday") )
+
+xnew <- xnew[, -5]
 
 y <- aggregate(steps~daytype+interval, xnew, mean)
 
